@@ -5,31 +5,60 @@ import "./OneBook.css"
 const OneBook = (props) => {
     const { productList = [], setCartArray, cartArray } = props;
     const [removeItem, setRemoveItem] = useState("no item");
-
-    const checkRemovedItem = (removeProduct) => {
-
-    }
+    const [totalValue, setTotalValue] = useState(0);
+    let [checkChanges, setCheckChanges] = useState(0);
+    let counter = 1;
 
     const addToCart = (item) => {
-        setCartArray([...cartArray,item])
+        let checkItemCond = false
+        cartArray.forEach(itemCheck => {
+            if (itemCheck.id === item.id) {
+                itemCheck.quantity++;
+                checkItemCond = true;
+                // console.log(itemCheck)
+            }
+        })
+
+        if (checkItemCond === false) {
+            item.quantity = 1;
+            // console.log("working")
+            // console.log(checkItemCond)
+            setCartArray([...cartArray, item])
+        }
+        // setCheckItemCond(false);
+        checkItemCond = false;
+        setCheckChanges(counter++)
+
     }
 
     const removeFromCart = (item) => {
         setRemoveItem(item)
         setCartArray(() => {
+            cartArray.forEach(removeItem => {
+                if (removeItem.id === item.id) {
+                    removeItem.quantity--;
+                }
+            })
             return cartArray.filter((removeNewItem) => {
-                return removeNewItem.name != item.name;
+                return removeNewItem.id != item.id;
             })
         })
+        setCheckChanges(counter++)
     }
 
     useEffect(() => {
+        let valueCal = 0;
         console.log(cartArray);
-    },[cartArray])
+        cartArray.forEach(item => {
+            valueCal = valueCal + (Number(item.price) * Number(item.quantity))
+        })
+        console.log(valueCal)
+        setTotalValue(valueCal)
+    }, [cartArray, checkChanges])
 
     useEffect(() => {
         console.log(removeItem)
-    },[removeItem])
+    }, [removeItem])
 
     return (
         <div className="onebook_main_container">
@@ -46,6 +75,9 @@ const OneBook = (props) => {
                     )
                 })
             }
+            <div className="total-value">
+                {totalValue}
+            </div>
         </div>
     )
 }

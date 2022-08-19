@@ -37,3 +37,11 @@
     background-color: rgb(27, 106, 255);
     color: white;
 }
+
+.total-value{
+    background-color: antiquewhite;
+    width: 300px;
+    height: 100px;
+    font-size: 25px;
+    border-radius: 5px;
+}

@@ -5,11 +5,13 @@ const BookData = {
             "productList": [
                 {
                     "name": "Hair Oil",
-                    "price": 122
+                    "price": 122,
+                    "id": 1
                 },
                 {
                     "name": "Face wash",
-                    "price": 123
+                    "price": 123,
+                    "id": 2
                 }
             ]
         },
@@ -18,11 +20,13 @@ const BookData = {
             "productList": [
                 {
                     "name": "Hair Oil",
-                    "price": 122
+                    "price": 122,
+                    "id": 1
                 },
                 {
                     "name": "Face wash",
-                    "price": 123
+                    "price": 123,
+                    "id": 2
                 }
             ]
         }
